@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/w3.css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <form>
+            <input type="text" id="inputField" onkeyup="doUpdate()"/>
+            
+        </form>
+        <div id="wisdom">
+            
+        </div>
+        
+        <script>
+           var wisdomTag= document.getElementById("wisdom");
+           var inputTag=document.getElementById("inputField");
+           function doUpdate()
+           {
+               var req;
+               if(window.XMLHttpRequest)
+               {
+                   req= new XMLHttpRequest();
+               }else if(window.ActiveXObject)
+               {
+                   req= new ActiveXObject("Microsoft.XMLHTTP");
+               }
+               else
+               {
+                   aleter("Ajax not supported");
+               }
+               req.onreadystatechange=function(){
+                   if(req.readyState==4 && req.status==200)
+                   {
+                       wisdomTag.innerHTML=req.responseText;
+                   }
+               }
+               text=inputTag.value;
+               req.open("GET","./Async?travailId="+text,true);
+               req.send(null);
+           }
+            
+        </script>
+    </body>
+</html>
